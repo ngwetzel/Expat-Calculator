@@ -1,4 +1,4 @@
-package Expat.DAO;
+package com.expat.DAO;
 
 import com.techelevator.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;

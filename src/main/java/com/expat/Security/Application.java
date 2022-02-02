@@ -1,4 +1,4 @@
-package Expat.Security;
+package com.expat.Security;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

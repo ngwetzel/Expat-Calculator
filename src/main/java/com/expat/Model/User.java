@@ -1,4 +1,4 @@
-package Expat.Model;
+package com.expat.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

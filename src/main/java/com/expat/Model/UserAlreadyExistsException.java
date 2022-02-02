@@ -1,4 +1,4 @@
-package Expat.Model;
+package com.expat.Model;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
