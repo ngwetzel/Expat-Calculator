@@ -7,22 +7,30 @@ CREATE SEQUENCE seq_user_id
   NO MINVALUE
   CACHE 1;
 CREATE TABLE users (
-	user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
+	user_id SERIAL NOT NULL,
 	username varchar(50) NOT NULL,
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
 	is_NHRS boolean,
 	salary_usd NUMERIC,
 	salary_euro NUMERIC,
-	industry varchar(250);
-	CONSTRAINT PK_user PRIMARY KEY (user_id)
+	industry varchar(250),
+	final_salary NUMERIC,
+CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
 CREATE TABLE qualifying_industries (
         industry_id SERIAL NOT NULL PRIMARY KEY,
-        industry_name varchar(250) NOT NULL,
-        is_NHRS boolean,
-CONSTRAINT fk_users FOREIGN KEY (industry_name) REFERENCES users (industry)
+        industry_name varchar(250) UNIQUE NOT NULL,
+        is_NHRS boolean
+);
+
+CREATE TABLE user_industry (
+        user_id int,
+        industry_id int,
+CONSTRAINT pk_user_industry PRIMARY KEY (user_id, industry_id),
+CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES users (user_id),
+CONSTRAINT fk_qualifying_industries FOREIGN KEY (industry_id) REFERENCES qualifying_industries (industry_id)
 );
 
 
@@ -34,6 +42,51 @@ CREATE TABLE brackets (
         percentage NUMERIC,
 CONSTRAINT fk_qualifying_industries FOREIGN KEY (NHRS_bracket) REFERENCES qualifying_industries (is_NHRS)
 ); 
+
+CREATE TABLE regions (
+        region_id SERIAL,
+        region_name varchar(350) NOT NULL PRIMARY KEY,
+        average_temp_summer_f NUMERIC,
+        average_temp_winter_f NUMERIC,
+        average_temp_summer_c NUMERIC,
+        average_temp_winter_c NUMERIC,
+);
+
+CREATE TABLE cities (
+        city_id SERIAL NOT NULL PRIMARY KEY,
+        city_name varchar(500) NOT NULL,
+        region varchar(350),
+        is_coastal boolean,
+        border_spain boolean,
+        population NUMERIC,
+        cost_of_living NUMERIC,
+ CONSTRAINT fk_regions FOREIGN KEY (region) REFERENCES regions (region_name)
+ );
+ 
+ CREATE TABLE region_cities (
+        city_id NUMERIC,
+        region_id NUMERIC,
+CONSTRAINT pk_region_cities PRIMARY KEY (city_id, region_id),
+CONSTRAINT fk_regions FOREIGN KEY (region_id) REFERENCES regions (region_id),
+CONSTRAINT fk_cities FOREIGN KEY (city_id) REFERENCES cities (city_id)
+);
+        
+CREATE TABLE user_preference (
+        preference_id SERIAL NOT NULL PRIMARY KEY,
+        user_id NUMERIC,
+        salary NUMERIC,
+        desired_temp_range_winter NUMERIC,
+        desired_temp_range_summer NUMERIC,
+        desires_coastal boolean,
+        desires_border_spain boolean,
+        desired_population_range varchar(300),
+        desired_cost_of_living varchar(500),
+CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES users (user_id),
+CONSTRAINT fk_users FOREIGN KEY (salary) REFERENCES users (salary_after_taxes)
+);
+        
+        
+        
 
 COMMIT TRANSACTION;
 -- ALL TABLES INSERTED INTO DATABASE GO ABOVE THIS LINE
