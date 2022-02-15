@@ -71,10 +71,7 @@ public class JdbcUserDao implements UserDao {
         boolean userCreated = false;
 
         // create user
-        String insertUser = "insert into users (username, first_name, last_name, is_teacher, password_hash,role) values(?,?,?,?,?,?)";
-        String ssFirstName = firstName;
-        String ssLastName = lastName;
-        boolean ssIsTeacher = isTeacher;
+        String insertUser = "insert into users (username, password_hash, role, industry) values(?,?,?,?,?,?)";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         String ssRole = "ROLE_" + role.toUpperCase();
 
@@ -83,11 +80,9 @@ public class JdbcUserDao implements UserDao {
         userCreated = jdbcTemplate.update(con -> {
                     PreparedStatement ps = con.prepareStatement(insertUser, new String[]{id_column});
                     ps.setString(1, username);
-                    ps.setString(2, firstName);
-                    ps.setString(3, lastName);
-                    ps.setBoolean(4, isTeacher);
-                    ps.setString(5, password_hash);
-                    ps.setString(6, ssRole);
+                    ps.setString(2, password_hash);
+                    ps.setString(3, ssRole);
+                    ps.setString(4, ssIndustry);
                     return ps;
                 }
                 , keyHolder) == 1;
@@ -106,11 +101,9 @@ public class JdbcUserDao implements UserDao {
         User user = new User();
         user.setId(rs.getLong("user_id"));
         user.setUsername(rs.getString("username"));
-        user.setFirstName(rs.getString("first_name"));
-        user.setLastName(rs.getString("last_name"));
-        user.setTeacher(rs.getBoolean("is_teacher"));
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(rs.getString("role"));
+        user.setIndustry(rs.getString("industry"));
         user.setActivated(true);
         return user;
     }

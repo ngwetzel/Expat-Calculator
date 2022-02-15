@@ -2,15 +2,15 @@ package com.expat.Model;
 
 public class UserPreference {
 
-    int preferenceID;
-    int userID;
-    double salary;
-    String desiredTempRangeWinter;
-    String desiredTempRangeSummer;
-    boolean desiresCoastal;
-    boolean desiresBorderSpain;
-    String desiredPopulationRange;
-    String desiredCostOfLiving;
+    private int preferenceID;
+    private int userID;
+    private double salary;
+    private String desiredTempRangeWinter;
+    private String desiredTempRangeSummer;
+    private oolean desiresCoastal;
+    private  boolean desiresBorderSpain;
+    private String desiredPopulationRange;
+    private String desiredCostOfLiving;
 
     public UserPreference(int preferenceID, int userID, double salary, String desiredTempRangeWinter, String desiredTempRangeSummer, boolean desiresCoastal, boolean desiresBorderSpain, String desiredPopulationRange, String desiredCostOfLiving) {
         this.preferenceID = preferenceID;

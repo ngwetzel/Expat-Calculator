@@ -59,7 +59,7 @@ CREATE TABLE cities (
         is_coastal boolean,
         border_spain boolean,
         population NUMERIC,
-        cost_of_living NUMERIC,
+        cost_of_living varchar(500),
  CONSTRAINT fk_regions FOREIGN KEY (region) REFERENCES regions (region_name)
  );
  

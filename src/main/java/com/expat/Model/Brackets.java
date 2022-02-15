@@ -1,10 +1,10 @@
 package com.expat.Model;
 
 public class Brackets {
-    int bracketID;
-    boolean nhrsBracket;
-    int bracketLimit;
-    double percentage;
+    private int bracketID;
+    private boolean nhrsBracket;
+    private int bracketLimit;
+    private double percentage;
 
     public Brackets(int bracketID, boolean nhrsBracket, int bracketLimit, double percentage) {
         this.bracketID = bracketID;

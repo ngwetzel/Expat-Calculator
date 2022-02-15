@@ -1,6 +1,6 @@
 package com.expat.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -11,9 +11,13 @@ public class User {
    private Long id;
    private String username;
 
-   @JsonIgnore
+
    private String password;
-   @JsonIgnore
+   private double salaryUSD;
+   private double salaryEuro;
+   private String industry;
+   private double finalSalary;
+
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
 

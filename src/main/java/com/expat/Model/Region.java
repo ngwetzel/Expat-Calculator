@@ -1,12 +1,12 @@
 package com.expat.Model;
 
 public class Region {
-    int regionID;
-    String regionName;
-    double averageTempSummerF;
-    double averageTempWinterF;
-    double averageTempSummerC;
-    double averageTempWinterC;
+    private int regionID;
+    private String regionName;
+    private double averageTempSummerF;
+    private double averageTempWinterF;
+    private double averageTempSummerC;
+    private double averageTempWinterC;
 
     public Region(int regionID, String regionName, double averageTempSummerF, double averageTempWinterF, double averageTempSummerC, double averageTempWinterC) {
         this.regionID = regionID;

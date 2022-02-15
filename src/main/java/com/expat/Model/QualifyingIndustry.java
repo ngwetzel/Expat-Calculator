@@ -1,9 +1,9 @@
 package com.expat.Model;
 
 public class QualifyingIndustry {
-    int industryID;
-    String industryName;
-    boolean isNHRS;
+    private int industryID;
+    private String industryName;
+    private boolean isNHRS;
 
     public QualifyingIndustry(int industryID, String industryName, boolean isNHRS) {
         this.industryID = industryID;

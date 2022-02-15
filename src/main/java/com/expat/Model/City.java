@@ -2,13 +2,13 @@ package com.expat.Model;
 
 public class City {
 
-    int cityID;
-    String cityName;
-    String region;
-    boolean isCoastal;
-    boolean borderSpain;
-    long population;
-    float costOfLiving;
+    private int cityID;
+    private String cityName;
+    private String region;
+    private  boolean isCoastal;
+    private boolean borderSpain;
+    private long population;
+    private float costOfLiving;
 
     public City(int cityID, String cityName, String region, boolean isCoastal, boolean borderSpain, long population, float costOfLiving) {
         this.cityID = cityID;
