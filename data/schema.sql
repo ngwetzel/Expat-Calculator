@@ -39,17 +39,24 @@ CREATE TABLE brackets (
         bracket_id SERIAL NOT NULL PRIMARY KEY,
         NHRS_bracket boolean,
         bracket_limit NUMERIC,
-        percentage NUMERIC,
-CONSTRAINT fk_qualifying_industries FOREIGN KEY (NHRS_bracket) REFERENCES qualifying_industries (is_NHRS)
+        percentage NUMERIC
 ); 
 
+CREATE TABLE user_bracket (
+        user_id Integer,
+        bracket_id Integer,
+Constraint pk_user_bracket PRIMARY KEY (user_id, bracket_id),
+Constraint fk_users FOREIGN KEY (user_id) REFERENCES users (user_id),
+Constraint fk_brackets FOREIGN KEY (bracket_id) REFERENCES brackets (bracket_id)
+);
+
 CREATE TABLE regions (
-        region_id SERIAL,
-        region_name varchar(350) NOT NULL PRIMARY KEY,
+        region_id SERIAL NOT NULL UNIQUE PRIMARY KEY,
+        region_name varchar(350) NOT NULL UNIQUE,
         average_temp_summer_f NUMERIC,
         average_temp_winter_f NUMERIC,
         average_temp_summer_c NUMERIC,
-        average_temp_winter_c NUMERIC,
+        average_temp_winter_c NUMERIC
 );
 
 CREATE TABLE cities (
@@ -64,8 +71,8 @@ CREATE TABLE cities (
  );
  
  CREATE TABLE region_cities (
-        city_id NUMERIC,
-        region_id NUMERIC,
+        city_id Integer,
+        region_id Integer,
 CONSTRAINT pk_region_cities PRIMARY KEY (city_id, region_id),
 CONSTRAINT fk_regions FOREIGN KEY (region_id) REFERENCES regions (region_id),
 CONSTRAINT fk_cities FOREIGN KEY (city_id) REFERENCES cities (city_id)
@@ -73,7 +80,7 @@ CONSTRAINT fk_cities FOREIGN KEY (city_id) REFERENCES cities (city_id)
         
 CREATE TABLE user_preference (
         preference_id SERIAL NOT NULL PRIMARY KEY,
-        user_id NUMERIC,
+        user_id integer,
         salary NUMERIC,
         desired_temp_range_winter NUMERIC,
         desired_temp_range_summer NUMERIC,
@@ -81,8 +88,9 @@ CREATE TABLE user_preference (
         desires_border_spain boolean,
         desired_population_range varchar(300),
         desired_cost_of_living varchar(500),
+        suggested_region varchar(500),
 CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES users (user_id),
-CONSTRAINT fk_users FOREIGN KEY (salary) REFERENCES users (salary_after_taxes)
+CONSTRAINT fk_regions FOREIGN KEY (suggested_region) REFERENCES regions (region_name)
 );
         
         
