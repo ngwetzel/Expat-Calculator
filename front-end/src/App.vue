@@ -65,6 +65,7 @@
   width: 65%;
 }
 body {
+  background-image: url(".assets/Nazare.jpg");
   background: cadetblue;
   background-position: center;
   background-size: 100%;
